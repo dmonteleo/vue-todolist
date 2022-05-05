@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.css' integrity='sha512-1hsteeq9xTM5CX6NsXiJu3Y/g+tj+IIwtZMtTisemEv3hx+S9ngaW4nryrNcPM4xGzINcKbwUJtojslX2KG+DQ==' crossorigin='anonymous'/>
+        <link rel="stylesheet" href="./css/style.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <title>Todo List</title>
+    </head>
+    <body>
+        <div id="app" class="container">
+            <h1 class="titolo">ToDo list</h1>
+            <div class="new-todo">
+                <input 
+                    v-model.trim="newTodo"
+                    @keyup.enter="addTodo"
+                    type="text" 
+                    placeholder="Nuovo todo">
+                <button @click="addTodo">
+                  Aggiungi
+                </button>
+            </div>
+            <div class="todo-container">
+                <ul v-if="todos.length > 0">
+                    <li 
+                    v-for="(todo, index) in todos"
+                    :class="{'done' : todo.done}"
+                    @click="toggleDone(index)">
+                        <span>{{todo.text}}</span>
+                        <i 
+                            @click.stop="removeTodo(index)"
+                            class="fa-solid fa-trash-can"></i>
+                    </li>
+                </ul>
+                <h2 v-else>Non ci sono ToDo</h2>
+            </div>
+        </div>
+        <script src="./js/script.js"></script>
+    </body>
+</html>
